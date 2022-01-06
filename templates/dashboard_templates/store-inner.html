@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+	{% include 'dashboard_templates/helper/dashboard_header.html' %}
+	<title>Ресурсы</title>
+	<body>
+		<div class="page">
+			<!-- modal -->
+			<!-- modal -->
+			{% include 'dashboard_templates/helper/dashboard_navbar.html' %}
+
+				<div class="container">
+					<!-- body -->
+
+					<div class="files">
+						<div class="file">
+							<div class="file__name">
+								<i class="bx bx-folder"></i>
+								<span>Статься</span>
+							</div>
+							<div class="file__date">11.09.2020</div>
+							<div class="file__size">34Mb</div>
+							<a href="#" class="btn">Открыть</a>
+							<a href="#" class="btn">Скачать</a>
+						</div>
+						<div class="file">
+							<div class="file__name">
+								<i class="bx bx-folder"></i>
+								<span>Книга</span>
+							</div>
+							<div class="file__date">11.09.2020</div>
+							<div class="file__size">34Mb</div>
+							<a href="#" class="btn">Открыть</a>
+							<a href="#" class="btn">Скачать</a>
+						</div>
+						<div class="file">
+							<div class="file__name">
+								<i class="bx bx-folder"></i>
+								<span>Ещё что-то</span>
+							</div>
+							<div class="file__date">11.09.2020</div>
+							<div class="file__size">34Mb</div>
+							<a href="#" class="btn">Открыть</a>
+							<a href="#" class="btn">Скачать</a>
+						</div>
+					</div>
+
+					<div class="pagination">
+						<a href="#" class="pagination__btn">1</a>
+						<a href="#" class="pagination__btn">2</a>
+						<a href="#" class="pagination__btn">3</a>
+						<span class="pagination__dots">...</span>
+						<a href="#" class="pagination__btn">9</a>
+						<a href="#" class="pagination__btn">10</a>
+					</div>
+				</div>
+			</main>
+		</div>
+
+		{% include 'dashboard_templates/helper/dashboard_footer.html' %}
+	</body>
+</html>
