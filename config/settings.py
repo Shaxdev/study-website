@@ -31,6 +31,12 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'adminlte3',
+    'adminlte3_theme',
+    
+    'ckeditor',
+    'ckeditor_uploader',
+    
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -40,6 +46,8 @@ INSTALLED_APPS = [
     
     # apps 
     'pages',
+    'profile_app',
+    'models1',
 ]
 
 MIDDLEWARE = [
@@ -103,6 +111,31 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 
+# 
+# 
+CKEDITOR_CONFIGS = {
+   'default': {
+      'toolbar': 'Custom',
+      'extraPlugins': 'sharedspace',
+      'toolbar_Custom': [
+         ['Italic', 'Underline'],
+         {
+            'name': 'colors',
+            'items': ['TextColor', 'BGColor']
+         },
+      ],
+      'sharedSpaces': {
+         'top': 'top',
+         'bottom': 'bottom',
+      },
+      'removePlugins': ['elementspath', 'resize'],
+      'enterMode': 2,
+      'height': 150,
+      'width': 300,
+   },
+}
+
+
 # Internationalization
 # https://docs.djangoproject.com/en/4.0/topics/i18n/
 
@@ -126,3 +159,11 @@ STATICFILES_DIRS = [
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+CKEDITOR_UPLOAD_PATH = "ckeditor_uploads/"
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'mirolimturgunov011012@gmail.com'
+EMAIL_HOST_PASSWORD = 'mr011012'
+EMAIL_USE_TLS = True
+EMAIL_PORT = '587'

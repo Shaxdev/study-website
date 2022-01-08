@@ -1,0 +1,21 @@
+<div class="dash__nav">
+    <div class="dash__btn">
+        <span>Настройки</span>
+        <div class="dash__triangle"></div>
+    </div>
+    <div class="dash__nav__box">
+        <div class="dash__nav__item active" data-nav="personal">
+            <a href="{% url 'profile_user_info' %}"> Личные данные </a>
+        </div>
+        <div class="dash__nav__item" data-nav="password">
+           Изменить пароль
+            <a href="{% url 'change_password' %}">  </a>
+        </div>
+        <div class="dash__nav__item" data-nav="language">
+            <a href="{% url 'language_set' %}"> Смена языка </a>
+        </div>
+        <div class="dash__nav__item" data-nav="phone"> 
+            <a href="{% url 'change_email' %}"> Изменить e-mail </a>
+        </div>
+    </div>
+</div>

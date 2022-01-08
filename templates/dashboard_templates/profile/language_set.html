@@ -1,0 +1,107 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+	{% include 'dashboard_templates/helper/dashboard_header.html' %}
+	<body>
+		<div class="page">
+			<!-- modal -->
+			{% include 'dashboard_templates/helper/dashboard_navbar.html' %}
+
+				<div class="container">
+					<!-- body -->
+
+					<div class="dash">
+						<div class="dash__box">
+							<div class="dash__nav">
+                                <div class="dash__btn">
+                                    <span>Настройки</span>
+                                    <div class="dash__triangle"></div>
+                                </div>
+                                <div class="dash__nav__box">
+                                    <div class="dash__nav__item" data-nav="personal">
+                                        <a href="{% url 'profile_user_info' %}"> Личные данные </a>
+                                    </div>
+                                    <div class="dash__nav__item" data-nav="password">
+                                       
+                                        <a href="{% url 'change_password' %}">Изменить пароль  </a>
+                                    </div>
+                                    <div class="dash__nav__item active" data-nav="language">
+                                        <a href="{% url 'language_set' %}"> Смена языка </a>
+                                    </div>
+                                    <div class="dash__nav__item" data-nav="phone"> 
+                                        <a href="{% url 'change_email' %}"> Изменить e-mail </a>
+                                    </div>
+                                </div>
+                            </div>
+							<div class="dash__main">
+                                
+                               
+                                    <!-- language switcher -->
+                                <div class="dash__item dash__item--language active">
+                                    <form class="form">
+                                        <!-- select -->
+                                        <div class="input__wrapper language">
+                                            <div class="input__box">
+                                                <input readonly class="input select" value="O'zbek" />
+
+                                                <!-- select btn -->
+                                                <div class="input__btn">
+                                                    <div class="input__triangle"></div>
+                                                </div>
+
+                                                <!-- custom options -->
+                                                <div class="input__list">
+                                                    <ul>
+                                                        <li>
+                                                            <label
+                                                                for="labguage2"
+                                                                class="input__option"
+                                                                aria-hidden="aria-hidden"
+                                                            >
+                                                                Руский
+                                                            </label>
+                                                        </li>
+                                                        <li>
+                                                            <label
+                                                                for="labguage3"
+                                                                class="input__option"
+                                                                aria-hidden="aria-hidden"
+                                                            >
+                                                                English
+                                                            </label>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+
+                                                <!-- hidden radio inputs -->
+                                                <div class="input__group">
+                                                    <input
+                                                        type="radio"
+                                                        id="labguage1"
+                                                        name="labguage"
+                                                        value="O'zbek"
+                                                        checked
+                                                    />
+                                                    <input
+                                                        type="radio"
+                                                        id="labguage2"
+                                                        name="labguage"
+                                                        value="Руский"
+                                                    />
+                                                    <input
+                                                        type="radio"
+                                                        id="labguage3"
+                                                        name="labguage"
+                                                        value="English"
+                                                    />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form__footer">
+                                            <a class="btn btn--gray" href="#">Отмена</a>
+                                            <button class="btn">Сохранить</button>
+                                        </div>
+                                    </form>
+                                </div>
+                                                                       
+{% include 'dashboard_templates/helper/dashboard_footer.html' %}

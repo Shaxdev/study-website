@@ -41,9 +41,6 @@ def dashboard_pasword_change(request):
     return render(request, 'dashboard_templates/dashboard-password-change.html')
 
 
-def dashboard(request):
-    
-    return render(request, 'dashboard_templates/dashboard.html')
 
 
 

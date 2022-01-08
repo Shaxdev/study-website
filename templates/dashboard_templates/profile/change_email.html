@@ -1,0 +1,79 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+	{% include 'dashboard_templates/helper/dashboard_header.html' %}
+	<body>
+		<div class="page">
+			<!-- modal -->
+			{% include 'dashboard_templates/helper/dashboard_navbar.html' %}
+
+				<div class="container">
+					<!-- body -->
+
+					<div class="dash">
+						<div class="dash__box">
+							<div class="dash__nav">
+                                <div class="dash__btn">
+                                    <span>Настройки</span>
+                                    <div class="dash__triangle"></div>
+                                </div>
+                                <div class="dash__nav__box">
+                                    <div class="dash__nav__item" data-nav="personal">
+                                        <a href="{% url 'profile_user_info' %}"> Личные данные </a>
+                                    </div>
+                                    <div class="dash__nav__item" data-nav="password">
+                                       
+                                        <a href="{% url 'change_password' %}"> Изменить пароль </a>
+                                    </div>
+                                    <div class="dash__nav__item" data-nav="language">
+                                        <a href="{% url 'language_set' %}"> Смена языка </a>
+                                    </div>
+                                    <div class="dash__nav__item active" data-nav="phone"> 
+                                        <a href="{% url 'change_email' %}"> Изменить e-mail </a>
+                                    </div>
+                                </div>
+                            </div>
+							<div class="dash__main">
+                                <!-- e-mail change -->
+								<div class="dash__item dash__item--phone active">
+									<form class="form" method='POST'>
+										{% csrf_token %}
+										<div class="form__flash">
+											Неправильный код подтверждение
+										</div>
+										<div class="input__wrapper phone">
+											<p class="input__label">Изменить e-mail</p>
+											<div class="input__box">
+												<input
+													type="text"
+													name="email"
+													class="input"
+													value="{{ user.email }}"
+												/>
+												<img
+													class="input__cancel"
+													src="{% static 'dashboard/assets/img/cancel.png' %}"
+													alt=""
+												/>
+											</div>
+										</div>
+										{% comment %} <div class="input__wrapper phone">
+											<p class="input__label">Код подтверждение</p>
+											<div class="input__box">
+												<input type="text" class="input" />
+												<img
+													class="input__cancel"
+													src="{% static 'dashboard/assets/img/cancel.png' %}"
+													alt=""
+												/>
+											</div>
+										</div> {% endcomment %}
+										<div class="form__footer">
+											<a class="btn btn--gray" href="{% url 'change_email'%}">Отмена</a>
+											<button type = 'submit' class="btn">Сохранить</button>
+										</div>
+									</form>
+								</div>
+                                    
+                                                                       
+{% include 'dashboard_templates/helper/dashboard_footer.html' %}
