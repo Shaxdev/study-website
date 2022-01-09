@@ -1,5 +1,7 @@
 from django.db import models
 from ckeditor.fields import RichTextField
+from ckeditor_uploader.fields import RichTextUploadingField
+from django.contrib.auth.models import User
 
 # Create your models here.
 
@@ -23,39 +25,44 @@ class MainModel(models.Model):
     
     STATUS_CHOICES = (
         ('Active', 'Active'),
+        ('Bajarilmoqda', 'Bajarilmoqda'),
         ('Tugatildi', 'Tugatildi'),
         ('Failing', 'Failing'),
     )
 
-    status = models.CharField(max_length=9, choices=STATUS_CHOICES, default='Active')
+    status = models.CharField(max_length=15, choices=STATUS_CHOICES, default='Active')
     
     addet_at = models.DateTimeField(auto_now_add=True, verbose_name='Model qoshilgan vaqt')
     
     def __str__(self):
         return self.title
 
-
 class InsideModel(models.Model):
     class Meta:
         verbose_name = 'Model uchun malumot(content, video, file...)'
         verbose_name_plural = 'Model uchun malumot(content, video, file...)lar'
-    
-    m_id = models.ForeignKey(MainModel, on_delete=models.CASCADE, null=True, verbose_name='Qoshmoqchi bolgan malumotingiz modelini tanlang')
-    title = models.CharField(max_length=40)
+    position = models.PositiveIntegerField(null=True)  
+    m_id = models.ForeignKey(MainModel, on_delete=models.CASCADE, null=True, verbose_name='Qoshmoqchi bolgan malumotingiz modulini tanlang')
+    title = models.CharField(max_length=40, verbose_name='Mavzu')
     added_at = models.DateTimeField(auto_now_add=True)
     
     def __str__(self):
         return self.title
     
 class InlineModelContent(models.Model):
-    position = models.PositiveIntegerField(null=True)
+    class Meta:
+        verbose_name = 'Content'
+        verbose_name_plural = 'Content'
     inside_model = models.ForeignKey(InsideModel, on_delete=models.CASCADE, null=True)
-    content = RichTextField(null=True, blank=True)
+    title = models.CharField(max_length=100, null=True)
+    content = RichTextUploadingField(null=True, blank=True)
 
 class FileModel(models.Model):
-    
+    class Meta:
+        verbose_name = 'File'
+        verbose_name_plural = 'Files'
+        
     inside_model = models.ForeignKey(InsideModel, on_delete=models.CASCADE, null=True)
-    position = models.PositiveIntegerField(null=True)
     TYPE_CHOICES = (
         ('Prezintatsiya', 'Prezintatsiya'),
         ('Document', 'Document'),
@@ -71,7 +78,7 @@ class DescriptModel(models.Model):
         verbose_name = 'Model uchun description'
         verbose_name_plural = 'Model uchun descriptionlar'
         
-    m_id = models.ForeignKey(MainModel, on_delete=models.CASCADE, null=True, verbose_name='Model')
+    m_id = models.ForeignKey(KursModel, on_delete=models.CASCADE, null=True, verbose_name='Model')
     title = models.CharField(max_length=30)
     subtitle = models.CharField(max_length=60)
     image = models.ImageField(upload_to = 'static/Models/images')    
@@ -88,40 +95,4 @@ class DesContentModel(models.Model):# Contentlar uchun
     content = RichTextField(verbose_name = 'Conent', null=True)
     
     
-
-class TestModel(models.Model):
-    class Meta:
-        verbose_name = 'Test'
-        verbose_name_plural = 'Test'
-    m_id = models.ForeignKey(MainModel, on_delete = models.CASCADE, null=True) 
-    # md_id = main_model.
-    title = models.CharField(max_length=50)
-    TIME_CHOICES = (
-        (0, 0),
-        (10, 10),
-        (20, 20),
-        (30, 30),
-        (40, 40),
-        (60, 60),
-        (90, 90),
-    )
-    time_limit = models.IntegerField(choices=TIME_CHOICES, default = 0 ,null=True, help_text='Agar testni vaqtini cheklamoqchi bolsangis quyiydagilardan birini tanlang!')
-    added_at = models.DateTimeField(auto_now_add=True, null=True, verbose_name='Qoshilgan vaqti')
-    def __str__(self):
-        return f'Model: {self.m_id} \nTest: {self.title}'
-
     
-class QuestionModel(models.Model):
-    class Meta:
-        verbose_name = 'Question'
-        verbose_name_plural = 'Questions'
-    test = models.ForeignKey(TestModel, on_delete=models.CASCADE,   null=True)
-    question = RichTextField(null=True)
-    
-    def __str__(self):
-        return self.question
-
-class AnswerModel(models.Model):
-    question = models.ForeignKey(QuestionModel, on_delete=models.CASCADE,  null=True, verbose_name='Question')
-    answer = RichTextField(null=True)
-    is_correct = models.BooleanField(default=False )

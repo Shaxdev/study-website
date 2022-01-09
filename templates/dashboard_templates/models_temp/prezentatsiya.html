@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+	{% include 'dashboard_templates/helper/dashboard_header.html' %}
+	<title>Ознакомление с презентацией</title>
+	<body>
+		<div class="page">
+			<!-- modal -->
+			{% include 'dashboard_templates/helper/dashboard_navbar.html' %}
+
+				<!-- body -->
+
+				<div class="video">
+					<div class="video__head">
+						
+						{% for i in objects %}
+							{% if forloop.counter >= i.position %}
+								{% if forloop.counter <= hozirgi_page %}
+									{% if hozirgi_page == forloop.counter and hozirgi_page == songi_page %}
+										<a href="{% url 'universal_view' pk=i.id model_id=model_id %}" class="active">
+											<span>{{forloop.counter}}</span>
+											<p>{{ i.title }}</p>
+										</a>
+										
+										<a >
+											<span>{{ test_num }}</span>
+											<p>Опрос</p>
+											
+										</a>
+									{% else %}
+										<a href="{% url 'universal_view' pk=i.id model_id=model_id %}" class="active">
+											<span>{{forloop.counter}}</span>
+											<p>{{ i.title }}</p>
+										</a>
+									{% endif %}
+								{% else %}
+									
+										{% if forloop.counter == keyingi_page %}
+											<a href="{% url 'universal_view' pk=i.id model_id=model_id %}" >
+												<span>{{forloop.counter}}</span>
+												<p>{{ i.title }}</p>
+											</a>
+										
+										{% else %}
+											<a href="" class="disabled">
+												<span>{{forloop.counter}}</span>
+												<p>{{ i.title }}</p>
+												<i class="bx bx-lock-alt"></i>
+											</a>
+												
+										{% endif %}
+									
+								{% endif %}
+							{% endif %}
+						{% endfor %}
+						{% if hozirgi_page != songi_page %}
+									
+							<a class="disabled">
+								<span>{{ test_num }}</span>
+								<p>Опрос</p>
+								<i class="bx bx-lock-alt"></i>
+							</a>
+						{% endif %}
+					</div>
+
+					<!--
+					<video
+						controls
+						crossorigin
+						playsinline
+						poster="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-HD.jpg"
+					>
+						<source
+							src="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-576p.mp{{ con_num }}"
+							type="video/mp4"
+							size="576"
+						/>
+						<source
+							src="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-720p.mp4"
+							type="video/mp4"
+							size="720"
+						/>
+						<source
+							src="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-1080p.mp4"
+							type="video/mp4"
+							size="1080"
+						/>
+
+						<!- Caption files ->
+						<track
+							kind="captions"
+							label="English"
+							srclang="en"
+							src="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-HD.en.vtt"
+							default
+						/>
+						<track
+							kind="captions"
+							label="Français"
+							srclang="fr"
+							src="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-HD.fr.vtt"
+						/>
+					</video>
+					-->
+					{% for universal_source in universal_sources %}
+							{% if  universal_source.file_type == 'Prezintatsiya' %}
+								{% if universal_source.file_link %}
+									<iframe
+										src="https://docs.google.com/viewer?url={{ universal_source.file_link }}&embedded=true"
+										style="width: 100%; height: 600px"
+										frameborder="0"
+										>Ваш браузер не поддерживает фреймы
+									</iframe>
+								{% else %}
+									<iframe
+										src="https://docs.google.com/viewer?url={{ universal_source.file.url }}&embedded=true"
+										style="width: 100%; height: 600px"
+										frameborder="0"
+										>Ваш браузер не поддерживает фреймы
+									</iframe>
+								{% endif %}
+							
+							{% else %}
+								{% if universal_source.file_type == 'Video' %}
+									{% if universal_source.link %}
+										<video
+											controls
+											crossorigin
+											playsinline
+											>
+											{% comment %} poster="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-HD.jpg" {% endcomment %}
+											<source
+												src="{{ universal_source.file_link }}"
+												type="video/mp4"
+												size="576"
+											/>
+											<source
+												src="{{ universal_source.file_link }}"
+												type="video/mp4"
+												size="720"
+											/>
+											<source
+												src="{{ universal_source.file_link }}"
+												type="video/mp4"
+												size="1080"
+											/>
+
+											<!-- Caption files -->
+											<track
+												kind="captions"
+												label="English"
+												srclang="en"
+												src="{{ universal_source.file_link }}"
+												default
+											/>
+											<track
+												kind="captions"
+												label="Français"
+												srclang="fr"
+												src="{{ universal_source.file_link }}"
+											/>
+										</video>
+									{% else %}
+										<video
+											controls
+											crossorigin
+											playsinline
+											>
+											{% comment %} poster="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-HD.jpg" {% endcomment %}
+											<source
+												src="{{universal_source.file}}"
+												src="{{ universal_source.file }}"
+												type="video/mp4"
+												size="576"
+											/>
+											<source
+												src="{{ universal_source.file }}"
+												type="video/mp4"
+												size="720"
+											/>
+											<source
+												src="{{ universal_source.file }}"
+												type="video/mp4"
+												size="1080"
+											/>
+
+											<!-- Caption files -->
+											<track
+												kind="captions"
+												label="English"
+												srclang="en"
+												src="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-HD.en.vtt"
+												default
+											/>
+											<track
+												kind="captions"
+												label="Français"
+												srclang="fr"
+												src="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-HD.fr.vtt"
+											/>
+										</video>
+									{% endif %}
+								{% else %}
+									<div class="video__content">
+										{{ universal_source.content | safe }}
+									</div>
+								{% endif %}
+							{% endif %}
+								
+					{% endfor %}
+				</div>
+			</main>
+		</div>
+
+		<!-- scripts -->
+		<!-- CDN jquery -->
+		{% include 'dashboard_templates/helper/dashboard_footer.html' %}
+	</body>
+</html>

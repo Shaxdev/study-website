@@ -1,0 +1,36 @@
+<div class="video__head">
+
+    {% for i in model_objects%}
+    
+        <a href="{% url 'universal_view' pk=i.id %}" class="active">
+            <span>{{forloop.counter}}</span>
+            <p>{{ i.title }}</p>
+        </a>
+    {% endfor %}
+    <a href="" class="active">
+        <span>1</span>
+        <p>Ознакомление с презентацией</p>
+    </a>
+
+    <a href="videos.html" >
+        <span>2</span>
+        <p>Просмотр видео</p>
+        <!-- <i class="bx bx-lock-alt"></i> -->
+    </a>
+
+    <a class="disabled">
+        <span>3</span>
+        <p>Изучить документы</p>
+        <i class="bx bx-lock-alt"></i>
+    </a>
+    <a class="disabled">
+        <span>4</span>
+        <p>Поиск</p>
+        <i class="bx bx-lock-alt"></i>
+    </a>
+    <a class="disabled">
+        <span>5</span>
+        <p>Опрос</p>
+        <i class="bx bx-lock-alt"></i>
+    </a>
+</div>
