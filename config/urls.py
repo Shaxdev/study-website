@@ -22,4 +22,5 @@ urlpatterns = [
     path('profile/', include('profile_app.urls')),
     path('dash_models/', include('models1.urls')),
     path('ckeditor/', include('ckeditor_uploader.urls')),
+    path('account/', include('account.urls')),
 ]

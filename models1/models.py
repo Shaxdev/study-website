@@ -15,6 +15,7 @@ class KursModel(models.Model):
     def __str__(self):
         return self.title
 
+
 class MainModel(models.Model):
     class Meta:
         verbose_name = 'Asosiy Model'
@@ -37,6 +38,7 @@ class MainModel(models.Model):
     def __str__(self):
         return self.title
 
+
 class InsideModel(models.Model):
     class Meta:
         verbose_name = 'Model uchun malumot(content, video, file...)'
@@ -49,6 +51,8 @@ class InsideModel(models.Model):
     def __str__(self):
         return self.title
     
+    
+
 class InlineModelContent(models.Model):
     class Meta:
         verbose_name = 'Content'
@@ -57,20 +61,51 @@ class InlineModelContent(models.Model):
     title = models.CharField(max_length=100, null=True)
     content = RichTextUploadingField(null=True, blank=True)
 
+
+
+# class DOCMODELS(models.Model):
+#     class Meta:
+#         verbose_name = 'Document'
+#         verbose_name_plural = 'Documnets'
+    
+#     inside_model = models.ForeignKey(InsideModel, on_delete=models.CASCADE, null=True) 
+#     added_at = models.DateTimeField(auto_now_add=True)
+    
+# class DocumentContent(models.Model):
+#     class Meta:
+#         verbose_name = 'Content'
+#         verbose_name_plural = 'Content'
+#     document_id = models.ForeignKey(DOCMODELS, on_delete=models.CASCADE, null=True, verbose_name='Document')
+#     title = models.CharField(max_length=100, null=True)
+#     content = RichTextUploadingField(null=True, blank=True)
+
+    
+# class DocumentFile(models.Model):
+    
+#     document_id = models.ForeignKey(DOCMODELS, on_delete=models.CASCADE, null=True, verbose_name='Document')
+#     title = models.CharField(max_length=50, null=True)
+#     file = models.FileField(upload_to='static/documents/files', blank=True, help_text='Documentlar kiriting')
+#     downloadable = models.BooleanField()
+    
+    
+
 class FileModel(models.Model):
     class Meta:
         verbose_name = 'File'
         verbose_name_plural = 'Files'
-        
+    
+
     inside_model = models.ForeignKey(InsideModel, on_delete=models.CASCADE, null=True)
     TYPE_CHOICES = (
         ('Prezintatsiya', 'Prezintatsiya'),
-        ('Document', 'Document'),
         ('Video', 'Video'),
+        ('Documents', 'Documents'),
     )
+    title = models.CharField(max_length = 50, null=True, blank=True)
     file_type = models.CharField(max_length=15, choices=TYPE_CHOICES, null=True, help_text='File turini tanlang')
     file_link = models.CharField(max_length=400, null=True, blank=True)
     file = models.FileField(upload_to='static/documents/files',blank=True, null=True, help_text='Hatoliklar bolmasligi uchun Tanlagan Tipingizdagi filenigina yuklang')
+    downloadable = models.BooleanField()
 
 
 class DescriptModel(models.Model):
@@ -91,6 +126,7 @@ class DescriptModel(models.Model):
 
 class DesContentModel(models.Model):# Contentlar uchun 
     des = models.ForeignKey(DescriptModel, on_delete=models.CASCADE,  null=True, verbose_name='Description Model')
+
     title = models.CharField(max_length=25, null=True)
     content = RichTextField(verbose_name = 'Conent', null=True)
     

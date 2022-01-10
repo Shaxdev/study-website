@@ -10,12 +10,12 @@
 
 <!-- sidebar -->
 <div class="side">
-    <a href="index.html" class="side__header">
+    <a href="{% url 'home' %}" class="side__header">
         <img src="{% static 'dashboard/assets/img/logo.svg' %}" alt="" />
         <img src="{% static 'dashboard/assets/img/logo-mini.svg' %}" class="mini" alt="" />
     </a>
     <nav class="side__nav">
-        <a href="index.html" class="side__nav__item active">
+        <a href="{% url 'auoth_index' %}" class="side__nav__item active">
             <svg
                 width="24"
                 height="24"
@@ -28,7 +28,7 @@
             </svg>
             <div>Главная</div>
         </a>
-        <a href="moduls.html" class="side__nav__item">
+        <a href="{% url 'dash_model' %}" class="side__nav__item">
             <svg
                 width="24"
                 height="24"
@@ -45,7 +45,7 @@
             </svg>
             <div>Модули</div>
         </a>
-        <a href="#" class="side__nav__item">
+        <a href="" class="side__nav__item">
             <svg
                 width="24"
                 height="24"
@@ -60,7 +60,7 @@
             </svg>
             <div>Xabarlar</div>
         </a>
-        <a href="certificates.html" class="side__nav__item">
+        <a href="{% url 'dashboard_certificate' %}" class="side__nav__item">
             <svg
                 width="24"
                 height="24"
@@ -82,7 +82,7 @@
 
             <div>Sertifikatlar</div>
         </a>
-        <a href="store.html" class="side__nav__item">
+        <a href="{% url 'stoer' %}" class="side__nav__item">
             <svg
                 width="24"
                 height="24"
@@ -109,8 +109,8 @@
             <div>Ресурсы</div>
         </a>
     </nav>
-    <div class="side__footer">
-        <a href="help.html" class="side__footer__link">
+    {% comment %} <div class="side__footer">
+        <a href="{% url 'help' %}" class="side__footer__link">
             <svg
                 width="30"
                 height="30"
@@ -130,7 +130,7 @@
             </svg>
             <span>Помощь</span>
         </a>
-    </div>
+    </div> {% endcomment %}
     <div class="side__cancel">
         <svg
             width="24"
@@ -232,13 +232,17 @@
                 <div class="header__badge">
                     <div class="header__profile">
                         <div class="header__avatar">
-                            <img src="{% static 'dashboard/assets/img/avatar-filled.png' %}" alt="" />
+                            {% if profile_info.image %}
+                                <img src="{{ profile_info.image.url }}" alt="" />
+                            {% else %}
+                                <img src="{% static 'dashboard/assets/img/avatar-filled.png' %}" alt="" />
+                            {% endif %}
                         </div>
-                        <div class="header__name">Erkin</div>
+                        <div class="header__name">{{ profile_info.ism }}</div>
                         <div class="header__triangle"></div>
                     </div>
                     <div class="header__list">
-                        <a href="dashboard.html" class="header__list__item">
+                        <a href="{% url 'profile_user_info' %}" class="header__list__item">
                             <img src="{% static 'dashboard/assets/img/settings.png' %}" alt="" />
                             <span>Личные данные</span>
                         </a>

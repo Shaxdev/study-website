@@ -13,16 +13,17 @@
 					<div class="video__head">
 						
 						{% for i in objects %}
-							{% if forloop.counter >= i.position %}
+							
 								{% if forloop.counter <= hozirgi_page %}
 									{% if hozirgi_page == forloop.counter and hozirgi_page == songi_page %}
 										<a href="{% url 'universal_view' pk=i.id model_id=model_id %}" class="active">
 											<span>{{forloop.counter}}</span>
 											<p>{{ i.title }}</p>
 										</a>
-										
-										<a >
+						
+										<a href="{% url 'test' pk=model_id %}">
 											<span>{{ test_num }}</span>
+
 											<p>Опрос</p>
 											
 										</a>
@@ -50,7 +51,7 @@
 										{% endif %}
 									
 								{% endif %}
-							{% endif %}
+							
 						{% endfor %}
 						{% if hozirgi_page != songi_page %}
 									
@@ -167,18 +168,18 @@
 											>
 											{% comment %} poster="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-HD.jpg" {% endcomment %}
 											<source
-												src="{{universal_source.file}}"
-												src="{{ universal_source.file }}"
+												src="{{universal_source.file.url }}"
+												src="{{ universal_source.file.url }}"
 												type="video/mp4"
 												size="576"
 											/>
 											<source
-												src="{{ universal_source.file }}"
+												src="{{ universal_source.file.url }}"
 												type="video/mp4"
 												size="720"
 											/>
 											<source
-												src="{{ universal_source.file }}"
+												src="{{ universal_source.file.url }}"
 												type="video/mp4"
 												size="1080"
 											/>

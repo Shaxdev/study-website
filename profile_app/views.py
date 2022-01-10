@@ -2,6 +2,7 @@ from django.shortcuts import redirect, render
 from django.urls import reverse_lazy
 from django.contrib.auth.views import PasswordChangeView
 from django.contrib.auth.forms import PasswordChangeForm
+from account.models import User
 
 # 1-usul
 from django.core.mail import EmailMessage
@@ -15,10 +16,17 @@ from django.conf import settings
 from . import models, forms
 
 # Create your views here.
+from django.conf import settings
+User = settings.AUTH_USER_MODEL
 
 
 def profile_user_info(request):
-    user = request.user         
+    # print('User_info: ', request.user.id)
+    # print('Request_user: ', request.user)   
+    # user = User.objects.get(email=request.user)
+    # print('User: ', user)
+    user=request.user
+    # user = request.user         
     # user_info_objects = models.UserInfo.objects.all()
     try:
         user_info = models.UserInfo.objects.get(user=user)
@@ -36,9 +44,9 @@ def profile_user_info(request):
         else:
             form = forms.UserInfoForm(request.POST, request.FILES)
         if form.is_valid():
-            
+            user1=request.user
             form_data = form.cleaned_data
-            user_info.user = user
+            user_info.user = '3'
             user_info.image = form_data['image']
             user_info.ism = form_data['ism']
             user_info.familya = form_data['familya']
@@ -61,7 +69,7 @@ def profile_user_info(request):
 
 def change_password(request):
     
-    form = PasswordChangeForm(user=request.user)
+    form = PasswordChangeForm(user=request.user.id)
     if request.POST:
         form = PasswordChangeForm(user=request.user, data=request.POST)
         if form.is_valid():

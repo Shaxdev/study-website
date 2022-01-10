@@ -25,8 +25,14 @@ SECRET_KEY = 'django-insecure-joa_#r7y$ct0!1zvq#+=*ol(l4oi5b$$9!1bx1a5x4gc2s!93a
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
+
+from django.contrib.messages import constants as messages
+MESSAGE_TAGS = {
+    messages.INFO: '',
+    50: 'critical',
+}
 
 # Application definition
 
@@ -48,6 +54,8 @@ INSTALLED_APPS = [
     'pages',
     'profile_app',
     'models1',
+    'account',
+    
 ]
 
 MIDDLEWARE = [
@@ -167,3 +175,5 @@ EMAIL_HOST_USER = 'mirolimturgunov011012@gmail.com'
 EMAIL_HOST_PASSWORD = 'mr011012'
 EMAIL_USE_TLS = True
 EMAIL_PORT = '587'
+# CKEDITOR_UPLOAD_PATH = 'ckeditor_uploads/'
+AUTH_USER_MODEL = "account.User"

@@ -1,3 +1,5 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 	{% include 'dashboard_templates/helper/dashboard_header.html' %}
@@ -13,7 +15,7 @@
 
 					<div class="items">
 						<div class="item__wrapper">
-							<a href="dashboard.html" class="item item--info">
+							<a href="{% url 'profile_user_info' %}" class="item item--info">
 								<div class="item__left">
 									<div class="item__photo">
 										<img src="{% static 'dashboard/assets/img/avatar-filled.png' %}" alt="" />

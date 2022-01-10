@@ -1,7 +1,11 @@
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from . import models
-# Create your views here.
+from django.views.decorators.csrf import csrf_exempt
+from django.http import FileResponse
 
+
+# Create your views here.
+@csrf_exempt
 def dash_model(request):
     
     mdls = models.MainModel.objects.all()
@@ -14,18 +18,25 @@ def dash_model(request):
 
 # def universal_view_2(request):
     
-
+@csrf_exempt
 def universal_view(request, pk, model_id):
     objects = models.InsideModel.objects.filter(m_id = model_id)
     b_id = models.InsideModel.objects.get(id=pk)
     files = models.FileModel.objects.filter(inside_model=b_id)
     contents = models.InlineModelContent.objects.filter(inside_model=b_id)
     universal_sources = []
+    documents = []
+    anothers = []
     print('filelar', universal_sources)
     print(object)
     for file in files:
-        # if file.type != 'Documents': 
-        universal_sources.append(file)
+        print('File_type: ', file.file_type)
+        if file.file_type != 'Documents': 
+            
+            anothers.append(file)
+            universal_sources.append(file)
+        else:
+            documents.append(file)
     for content in contents:
         universal_sources.append(content)
   
@@ -45,18 +56,24 @@ def universal_view(request, pk, model_id):
     songi_page = c_objects
     test_num = c_objects + 1 # test raqami
     print('Songi page: ', c_objects)
+    print('Documents: ', documents)
+    
     context = {
-        'objects': objects,
-        'model_id': model_id,
-        'universal_sources': universal_sources,
-        'test_num': test_num,
-        'hozirgi_page': hozirgi_page,
-        'keyingi_page': keyingi_page,
-        'songi_page': songi_page,
-    }
+            'objects': objects,
+            'model_id': model_id,
+            'universal_sources': universal_sources,
+            'test_num': test_num,
+            'hozirgi_page': hozirgi_page,
+            'keyingi_page': keyingi_page,
+            'songi_page': songi_page,
+            'documents': documents,
+            'contents': contents,
+        }
+    if len(documents) > len(anothers):
+        # return redirect('home')
+        return render(request, 'dashboard_templates/documents.html', context)
+
     return render(request, 'dashboard_templates/models_temp/universal.html', context)
-
-
 
 
 
@@ -69,7 +86,7 @@ def universal_view(request, pk, model_id):
 #     return render(request, 'dashboard_templates/models_temp/universal.html', context)
 
 # def inside_model_view(request, pk)
-
+@csrf_exempt
 def inside_model_view(request, pk):
     model = models.MainModel.objects.get(id=pk)
     objects = models.InsideModel.objects.filter(m_id = model)
@@ -111,29 +128,40 @@ def inside_model_view(request, pk):
     return render(request, 'dashboard_templates/models_temp/prezentatsiya.html', context)
 
 
-
-
-def test_view(request):
+# def test_view(request):
     
-    questions = models.QuestionModel
+#     questions = models.QuestionModel
     
-    return render(request, 'dashboard_templates/models_temp/test.html')
+#     return render(request, 'dashboard_templates/models_temp/test.html')
 
 
+# def document_view(request, pk, model_id):
+#     objects = models.InsideModel.objects.filter(m_id = model_id)
+#     documents = []
 
-def document_view(request, model_id):
-    objects = models.InsideModel.objects.filter(m_id = model_id)
-    documents = []
-    for ob in objects:
-        files = models.FileModel.objects.filter(inside_model=ob)
-        for file in files:
-            if file.file_type != 'Video':
-                documents.append(file)
+#     files = models.FileModel.objects.filter(inside_model=pk)
+#     contents = models.InlineModelContent(inside_model=pk)
+#     for file in files:
+#         if file.file_type != 'Video':
+#             documents.append(file)
+          
+        
+#     print('Documents: ', documents)
     
-    print('Documents: ', documents)
-    context = {
-        'documents': documents,
-        'model_id': model_id,
-        'objects': objects,
-    }
-    return render(request, 'dashboard_templates/documents.html', context)
+#     context = {
+#         'contents': contents,
+#         'documents': documents,
+#         'model_id': model_id,
+#         'objects': objects,
+#     }
+    
+#     return render(request, 'dashboard_templates/documents.html', context)
+
+
+def download(request, pk):
+    file1 = models.FileModel.objects.filter(id=pk)
+    for i in file1:
+        d= i.file
+    response = FileResponse(d)
+    # response['Content-Disposition'] = '; filename="shartnoma.pdf"'
+    return response

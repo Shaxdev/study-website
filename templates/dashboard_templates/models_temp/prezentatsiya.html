@@ -13,7 +13,7 @@
 					<div class="video__head">
 						
 						{% for i in objects %}
-							{% if forloop.counter >= i.position %}
+							
 								{% if forloop.counter <= hozirgi_page %}
 									{% if hozirgi_page == forloop.counter and hozirgi_page == songi_page %}
 										<a href="{% url 'universal_view' pk=i.id model_id=model_id %}" class="active">
@@ -21,7 +21,7 @@
 											<p>{{ i.title }}</p>
 										</a>
 										
-										<a >
+										<a href="{% url 'test' pk=model_id %}" >
 											<span>{{ test_num }}</span>
 											<p>Опрос</p>
 											
@@ -50,7 +50,7 @@
 										{% endif %}
 									
 								{% endif %}
-							{% endif %}
+						
 						{% endfor %}
 						{% if hozirgi_page != songi_page %}
 									

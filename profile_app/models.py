@@ -1,5 +1,5 @@
 from django.db import models
-from django.contrib.auth.models import User
+from account.models import User
 from .validators import validate_file_size
 # Create your models here.
 
@@ -37,7 +37,7 @@ class EmailCode(models.Model):
         verbose_name = "Code which is sended to user's email"
         verbose_name_plural = "Codes which is sended to users's emails"
         
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True )
     code = models.CharField(max_length=8, default=generate_email_code())
     is_active = models.BooleanField(default=True)
     

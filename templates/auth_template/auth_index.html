@@ -73,10 +73,12 @@
 							Данные введены неверно, проверьте и введите заново
 						</div>
 						<form action="#" method="POST" class="auth__form">
+                            {%  csrf_token %}
 							<div class="auth__input__box">
 								<input
 									type="email"
 									class="auth__input"
+                                    name="email"
 									placeholder="Ваш e-mail"
 									required
 								/>
@@ -85,6 +87,7 @@
 								<input
 									type="text"
 									class="auth__input"
+                                    name="password"
 									placeholder="Ваш пароль"
 									required
 								/>
@@ -94,7 +97,8 @@
 								<a href="#">Правилами пользвания</a>, а также
 								<a href="#">Политикой конфиденциальности</a>
 							</div>
-							<button class="btn">Войти</button>
+							<button type=
+							'submit' class="btn">Войти</button>
 							<div class="auth__forget">Забыли пароль?</div>
 						</form>
 					</div>
@@ -104,10 +108,12 @@
 						<div class="auth__title">Регистрация</div>
 						<div class="auth__flash">Пароли должны быть одинаковыми!</div>
 						<form action="#" class="auth__form" method="POST">
+                            {% csrf_token %}
 							<div class="auth__input__box">
 								<input
 									type="email"
 									class="auth__input"
+                                    name="email"
 									placeholder="Ваш e-mail"
 									required
 								/>
@@ -116,6 +122,7 @@
 								<input
 									type="text"
 									class="auth__input"
+                                    name="password1"
 									placeholder="Пароль"
 									required
 								/>
@@ -124,11 +131,12 @@
 								<input
 									type="text"
 									class="auth__input"
+                                    name="password2"
 									placeholder="Повторите пароль"
 									required
 								/>
 							</div>
-							<button class="btn">Продолжить</button>
+							<button type="submit" class="btn">Продолжить</button>
 						</form>
 					</div>
 
