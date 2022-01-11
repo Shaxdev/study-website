@@ -253,13 +253,14 @@
                             <img src="{% static 'dashboard/assets/img/lock.png' %}" alt="" />
                             <span>Смена пароля</span>
                         </a>
-                        <a href="#" class="header__list__item btn-exit">
+                        <a href="{% url 'logout' %}" class="header__list__item btn-exit">
                             <img src="{% static 'dashboard/assets/img/exit.png' %}" alt="" />
                             <span>Выход</span>
                         </a>
                     </div>
                 </div>
-                <div class="notes">
+                <!--Commentlar vaqti kelib ochilishi mumkun o'chirilmasin -->
+                {% comment %} <div class="notes">
                     <h2 class="notes__title">E’lonlar</h2>
                     <div class="note">
                         <p class="note__title">
@@ -310,7 +311,7 @@
                     <a href="#" class="notes__btn"
                         >Barchasini o’qilgan sifatida belgilash</a
                     >
-                </div>
+                </div> {% endcomment %}
             </div>
         </div>
     </header>

@@ -1,0 +1,65 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<!-- meta -->
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta name="author" content="Bilol Tuliboev" />
+		<meta name="robots" content="index, follow, noodp" />
+		<meta name="googlebot" content="index, follow" />
+		<meta name="google" content="notranslate" />
+		<meta name="format-detection" content="telephone=no" />
+		<meta name="keywords" content="" />
+		<meta name="description" content="" />
+
+		<!-- css -->
+		<link rel="stylesheet" href="{% static 'auth/assets/css/style.css' %}" />
+
+		<!-- title -->
+		<title>Авторизация</title>
+	</head>
+	<body>
+		<div class="page">
+			<!-- header -->
+			<header class="header">
+				<div class="container">
+					<div class="header__box">
+						<a href="#" class="header__logo">
+							<img src="{% static 'auth/assets/img/logo.svg' %}" alt="" />
+						</a>
+						<div class="header__lang">
+							<img src="{% static 'auth/assets/img/globe.png' %}" alt="" class="header__globe" />
+							<div class="header__lang__list">
+								<a href="#">
+									<img src="{% static 'auth/assets/img/uzbekistan-flag-png-large.png' %}" alt="" />
+									<span>O'zbekcha</span>
+								</a>
+
+								<a href="#">
+									<img src="{% static 'auth/assets/img/russia-flag-png-large.png' %}" alt="" />
+									<span>Руский</span>
+								</a>
+								<a href="#">
+									<img
+										src="{% static 'auth/assets/img/united-kingdom-flag-png-large.png' %}"
+										alt=""
+									/>
+									<span>English</span>
+								</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</header>
+            <!-- auth -->
+			
+
+                	{% comment %} <div class="auth__header">
+						<div class="auth__header__item active" data-auth="login">ВХОД</div>
+						<div class="auth__header__item" data-auth="register">
+							РЕГИСТРАЦИЯ
+						</div>
+					</div> {% endcomment %}

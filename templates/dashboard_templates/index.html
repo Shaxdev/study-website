@@ -17,16 +17,24 @@
 						<div class="item__wrapper">
 							<a href="{% url 'profile_user_info' %}" class="item item--info">
 								<div class="item__left">
-									<div class="item__photo">
-										<img src="{% static 'dashboard/assets/img/avatar-filled.png' %}" alt="" />
-									</div>
+									{% if profile_info.image %}
+										<div class="item__photo">
+											<img src="{{ profile_info.image.url }}" alt="" />
+										</div>
+									{% else %}
+										<div class="item__photo">
+											<img src="{% static 'dashboard/assets/img/avatar-filled.png' %}" alt="" />
+										</div>
+									{% endif %}
 									<span class="item__link">Изменить</span>
 								</div>
 								<div class="item__right">
-									<div class="item__fish">Muhammad Mamasoliyev</div>
+									{% if profile_info %}
+										<div class="item__fish">{{ profile_info.ism }} {{ profile_info.familya }}</div>
+									{% endif %}
 									<div class="item__mail">
 										E-mail:
-										<span>muhammad.m@gmail.com</span>
+										<span>{{ user.email }}</span>
 									</div>
 								</div>
 							</a>

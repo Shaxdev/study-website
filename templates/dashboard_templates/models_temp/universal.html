@@ -113,7 +113,7 @@
 									</iframe>
 								{% else %}
 									<iframe
-										src="https://docs.google.com/viewer?url={{ universal_source.file.url }}&embedded=true"
+										src="https://docs.google.com/viewer?url={{universal_source.file}}&embedded=true"
 										style="width: 100%; height: 600px"
 										frameborder="0"
 										>Ваш браузер не поддерживает фреймы
@@ -168,18 +168,18 @@
 											>
 											{% comment %} poster="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-HD.jpg" {% endcomment %}
 											<source
-												src="{{universal_source.file.url }}"
-												src="{{ universal_source.file.url }}"
+												src="{{universal_source.file}}"
+												src="{{universal_source.file}}"
 												type="video/mp4"
 												size="576"
 											/>
 											<source
-												src="{{ universal_source.file.url }}"
+												src="{{universal_source.file}}"
 												type="video/mp4"
 												size="720"
 											/>
 											<source
-												src="{{ universal_source.file.url }}"
+												src="{{universal_source.file}}"
 												type="video/mp4"
 												size="1080"
 											/>

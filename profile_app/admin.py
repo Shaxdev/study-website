@@ -10,7 +10,10 @@ admin.site.register(models.UserInfo, ProfileInfoAdmin)
 
 
 class ECodesAdmin(admin.ModelAdmin):
-    list_display = ['user', 'code']
+    list_display = ['user_id', 'code']
     search_fields = ['code']
     
 admin.site.register(models.EmailCode, ECodesAdmin)
+
+
+# admin.site.register(models.UserInfo1)

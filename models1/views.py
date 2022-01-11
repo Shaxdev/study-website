@@ -5,20 +5,25 @@ from django.http import FileResponse
 
 
 # Create your views here.
-@csrf_exempt
+
 def dash_model(request):
     
+    description = models.DescriptModel.objects.filter(m_id=1).first()
     mdls = models.MainModel.objects.all()
-    
+    contents = models.DesContentModel.objects.filter(des=description)
+    for i in mdls:
+        print('Pk: ', i.id)
     context = {
         'models': mdls,
+        'description': description,
+        'contents': contents
     }
     return render(request, 'dashboard_templates/models_temp/info.html', context)
 
 
 # def universal_view_2(request):
     
-@csrf_exempt
+
 def universal_view(request, pk, model_id):
     objects = models.InsideModel.objects.filter(m_id = model_id)
     b_id = models.InsideModel.objects.get(id=pk)
@@ -77,16 +82,6 @@ def universal_view(request, pk, model_id):
 
 
 
-# def universal_view(request, pk, model_id):
-
-    
-#     context = {
-        
-#     }
-#     return render(request, 'dashboard_templates/models_temp/universal.html', context)
-
-# def inside_model_view(request, pk)
-@csrf_exempt
 def inside_model_view(request, pk):
     model = models.MainModel.objects.get(id=pk)
     objects = models.InsideModel.objects.filter(m_id = model)

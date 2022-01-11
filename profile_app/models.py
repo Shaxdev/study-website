@@ -2,6 +2,7 @@ from django.db import models
 from account.models import User
 from .validators import validate_file_size
 # Create your models here.
+# from django.contrib.auth.models import User 
 
     
 class UserInfo(models.Model):
@@ -9,7 +10,7 @@ class UserInfo(models.Model):
         verbose_name = 'Users information'
         verbose_name_plural = 'Users informations'
         
-    user = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
+    user= models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
     ism = models.CharField(max_length=30, null=True)
     familya = models.CharField(max_length=35, null=True)
     sharif = models.CharField(max_length=35, null=True)
@@ -37,7 +38,7 @@ class EmailCode(models.Model):
         verbose_name = "Code which is sended to user's email"
         verbose_name_plural = "Codes which is sended to users's emails"
         
-    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True )
+    user_id = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True )
     code = models.CharField(max_length=8, default=generate_email_code())
     is_active = models.BooleanField(default=True)
     
@@ -47,3 +48,15 @@ class EmailCode(models.Model):
     def __str__(self):
         
         return f'email: {self.user.email} \nCode: {self.code}'
+    
+    
+# class UserInfo1(models.Model):
+#     class Meta:
+#         verbose_name = 'Users information'
+#         verbose_name_plural = 'Users informations'
+        
+#     user = models.ForeignKey('User', models.CASCADE, null=True)
+#     ism = models.CharField(max_length=30, null=True)
+#     familya = models.CharField(max_length=35, null=True)
+#     sharif = models.CharField(max_length=35, null=True)
+#     image = models.ImageField(upload_to = 'static/images/profile_img', validators=[validate_file_size])

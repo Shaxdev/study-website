@@ -6,6 +6,7 @@ from django.core.paginator import Paginator
 from django.shortcuts import render, redirect
 from .models import Test, classinline, natijalar, TestModul
 
+from profile_app import models
 
 # def register_login_view(request):
 #     context = {
@@ -20,8 +21,12 @@ def home(request):
     return render(request, 'index.html')
 
 def auoth_index(request):
+    
+    profile_info = models.UserInfo.objects.filter(user=request.user).first()
+    user = request.user
     context = {
-
+        'profile_info': profile_info,
+        'user': user,
     }
     return render(request, 'dashboard_templates/index.html', context)
 
@@ -128,10 +133,14 @@ from .form import NatijaForm
 # def home(request)
 
 def test(request, pk):
+    print(pk)
+    
     global h, g
     test = TestModul.objects.filter(moduls_test_key=pk)
     for i in test:
        id = i.id
+       
+       print(id ,'+++++++++')
     
     test1 = Test.objects.filter(test_key=id).order_by('?')
     
@@ -171,7 +180,7 @@ def test(request, pk):
             da.Test1 = test.first()
             da.save()
 
-            return redirect('result', pk=sa)
+            return redirect('result', pk=id)
         else:
             pass
 
@@ -187,7 +196,7 @@ def test(request, pk):
     return render(request, 'dashboard_templates/test.html', context)
 
 
-def result(request,pk):
+def result(request, pk):
     # data = natijalar.objects.filter(test=id)
     # test = TestModul.objects.filter(id=1)
     result = []
@@ -196,15 +205,20 @@ def result(request,pk):
     # for i in data:
     #     i.test_t
     from pages.models import natijalar
-    data = natijalar.objects.filter(Test1=1)
+    data = natijalar.objects.filter(Test1=pk)
     results = []
-    for i in data:
-        results.append(i.test_t)
-    d = max(results)
+    # for i in data:
+    #     results.append(i.test_t)
+    # d = max(results)
     data2 = natijalar.objects.filter(Test1=pk).last()
+    # data2.first()
+    print(data2,';;;;;;;;;;;')
+    print(pk,'pkpkpkp')
+    
         
     # for i in data2:
     d = data2.test_t
+    
     d2 = data2.test_alls
     porsent = int(float(d) / float(d2) * 100)
     d3 = d2 - d

@@ -55,7 +55,7 @@ INSTALLED_APPS = [
     'profile_app',
     'models1',
     'account',
-    
+    'register',
 ]
 
 MIDDLEWARE = [

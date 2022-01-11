@@ -4,6 +4,9 @@ from django.urls import reverse
 from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponse
 
+from django.contrib import messages
+
+
 from .models import User
 
 
@@ -14,13 +17,22 @@ def register_view(request):
     if request.method == "POST":
         form = UserRegisterForm(request.POST)
         if form.is_valid():
-            form.save()
-            print("ishladi-registratsiya")
-            return redirect(reverse('login-view'))
+            p1 = form.cleaned_data['password1']
+            p2 = form.cleaned_data['password2']
+            if p1 == p2:
+                form.save()
+                print("ishladi-registratsiya")
+                return redirect(reverse('auoth_index'))
+            else:
+                messages.error(request, 'Пароли должны быть одинаковыми!')
+                return redirect(reverse('register-view'))
+        else:
+            messages.error(request, 'Email mavjud!!!')
+            return redirect(reverse('register-view'))
     context = {
         "form":form
     }
-    return render(request, 'auth_template/auth_index.html', context)
+    return render(request, 'auth_template/register.html', context)
 
 
 def login_view(request):
@@ -36,7 +48,9 @@ def login_view(request):
 
             if user:
                 login(request, user=user)
-                return redirect(reverse("home"))
+                return redirect(reverse("auoth_index"))
+            else:
+                messages.error(request, 'Данные введены неверно, проверьте и введите заново')
                 # next_page = request.GET.get("next", None)
                 # if next_page:
                 #     return redirect(next_page)
@@ -46,7 +60,7 @@ def login_view(request):
     context = {
         "form": form
     }
-    return render(request, 'auth_template/auth_index.html', context)
+    return render(request, 'auth_template/login.html', context)
 
 
 # def account_logout(request):

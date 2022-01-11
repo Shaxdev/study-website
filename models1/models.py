@@ -110,10 +110,10 @@ class FileModel(models.Model):
 
 class DescriptModel(models.Model):
     class Meta:
-        verbose_name = 'Model uchun description'
-        verbose_name_plural = 'Model uchun descriptionlar'
+        verbose_name = 'Kurs uchun description'
+        verbose_name_plural = 'Kurs uchun descriptionlar'
         
-    m_id = models.ForeignKey(KursModel, on_delete=models.CASCADE, null=True, verbose_name='Model')
+    m_id = models.ForeignKey(KursModel, on_delete=models.CASCADE, null=True, verbose_name='Kurs')
     title = models.CharField(max_length=30)
     subtitle = models.CharField(max_length=60)
     image = models.ImageField(upload_to = 'static/Models/images')    
